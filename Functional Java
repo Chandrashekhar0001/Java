@@ -1,0 +1,52 @@
+package Chapter_1;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+ class Price {
+
+
+    // imperative approach
+
+    BigDecimal totalOfDiscountedPrices = BigDecimal.ZERO;
+    public void setTotalOfDiscountedPrices(List<BigDecimal> prices){
+        for (BigDecimal price : prices) {
+            if(price.compareTo(BigDecimal.valueOf(20)) > 0)
+                totalOfDiscountedPrices =
+                        totalOfDiscountedPrices.add(price.multiply(BigDecimal.valueOf(0.9)));
+        }
+    }
+
+    public BigDecimal getTotalOfDiscountedPrices(){
+        return totalOfDiscountedPrices;
+    }
+
+
+
+     // declarative approach
+
+//    final BigDecimal totalprice =
+//            prices.stream()
+//                    .filter(prices -> prices.compareTo(BigDecimal.valueOf(50)) > 0)
+//                    .map(prices -> prices.multiply(BigDecimal.valueOf(0.9)))
+//                    .reduce(BigDecimal.ZERO,BigDecimal::add);
+//
+//    public BigDecimal getTotalprice() {
+//        return totalprice;
+//    }
+
+}
+
+class Main1{
+    public static void main(String[] args) {
+        final List<BigDecimal> prices = Arrays.asList(
+                new BigDecimal(34),new BigDecimal(56),new BigDecimal(89),
+                new BigDecimal(45),new BigDecimal(65),new BigDecimal(90)
+        );
+        Price price = new Price();
+//        System.out.println("Total of discounted prices :"
+//                + price.getTotalprice() );
+        price.setTotalOfDiscountedPrices(prices);
+        System.out.println("Total of discounted prices: " +price.getTotalOfDiscountedPrices());
+    }
+}
