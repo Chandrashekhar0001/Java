@@ -1,0 +1,79 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class Practice{
+    public static void main(String[] args) {
+        final List<String> carName =
+                Arrays.asList("Challenger","G Wagon","Autobiography","Wrangler","Fortuner");
+        for (int index = 0; index < carName.size(); index++) {
+            System.out.println(carName.get(index));
+        }
+
+        for(String name:carName){
+            System.out.println(name);
+        }
+
+        carName.forEach(new Consumer<String>() {
+            @Override
+            public void accept(final String name) {
+                System.out.println(name);
+            }
+        });
+
+        carName.forEach(name -> System.out.println(name)); // lambda expression
+        System.out.println();
+        carName.forEach(System.out::println);  // method reference
+
+        carName.stream()
+                .forEach(name -> System.out.println(name));
+        carName.stream()
+                  .forEach(System.out::println);
+
+        final List<String> upperCase = new ArrayList<>();
+
+       carName.stream()
+               .map(String::toUpperCase)
+               .forEach(System.out::println);
+
+        carName.stream()
+                .map(String::length)
+                .forEach(System.out::println);
+
+        final List<String> startsWith =
+                carName.stream()
+                        .filter(name -> name.startsWith("W"))
+                        .collect(Collectors.toList());
+        System.out.println(startsWith);
+
+        final Predicate<String> isStartsWithF = name -> name.startsWith("F");
+
+        final List<String> startsWithF =
+                carName.stream()
+                        .filter(isStartsWithF)
+                        .toList();
+
+        System.out.println(startsWithF);
+
+        final List<String> startWith =
+                carName.stream()
+                        .filter(checkIfStartsWith("A"))
+                        .toList();
+
+        System.out.println(startWith);
+        final List<String> startWith2 =
+                carName.stream()
+                        .filter(checkIfStartsWith("G"))
+                        .toList();
+
+        System.out.println(startWith2);
+
+
+    }
+    public static Predicate<String> checkIfStartsWith (final String letter){
+        return name -> name.startsWith(letter);
+    }
+}
