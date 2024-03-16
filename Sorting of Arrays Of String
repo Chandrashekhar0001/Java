@@ -1,0 +1,26 @@
+import java.lang.String;
+import java.util.Arrays;
+
+class Sorter{
+    public void sort(String[] strings){
+        for (int counter = 0;counter < strings.length - 1;counter++) {
+            for (int index = 0;index < strings.length - 1;index++) {
+                if (strings[index].compareTo(strings[index + 1]) > 0 ){
+                    String temp = strings[index];
+                    strings[index] = strings[index + 1];
+                    strings[index + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+class main{
+    public static void main(String[] args) {
+        String[] names = new String[]{"gii","aello","zrishna","kbrishna_upadhyay"};
+        Sorter sorter = new Sorter();
+        System.out.println(Arrays.toString(names));
+        sorter.sort(names);
+        System.out.println(Arrays.toString(names));
+    }
+}
